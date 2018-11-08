@@ -204,7 +204,7 @@ class App extends Component {
           Oren's Kanban App
         </h1>
         <div className="ui container">
-          <div className="ui doubling three column grid">
+          <div className="ui doubling stackable three column grid">
             {bucketNames.map((bucket, i) => {
               return (
                 <div className="column" key={bucket}>

@@ -24,7 +24,7 @@ export default class Task extends Component {
         color = "orange";
     }
 
-    let style = `ui centered ${color} segment`;
+    let style = `ui ${color} segment`;
     return (
       <div
         className="item"
@@ -32,29 +32,31 @@ export default class Task extends Component {
         onDrag={event => onDrag(event, task, index)}
       >
         <div className={style}>
-          {index === 0 ? (
-            <i
-              onClick={() => moveTask(task, index, "delete")}
-              className="delete icon small left-floated"
-            />
-          ) : (
-            <i
-              onClick={() => moveTask(task, index, "left")}
-              className="angle left icon big left-floated"
-            />
-          )}
           {task}
-          {index === lastIndex ? (
-            <i
-              onClick={() => moveTask(task, index, "delete")}
-              className="delete icon small right-floated"
-            />
-          ) : (
-            <i
-              onClick={() => moveTask(task, index, "right")}
-              className="angle right icon big right-floated"
-            />
-          )}
+          <div className="right floated padding" id="padding">
+            {index === 0 ? (
+              <i
+                onClick={() => moveTask(task, index, "delete")}
+                className="delete icon large"
+              />
+            ) : (
+              <i
+                onClick={() => moveTask(task, index, "left")}
+                className="angle left icon big"
+              />
+            )}
+            {index === lastIndex ? (
+              <i
+                onClick={() => moveTask(task, index, "delete")}
+                className="delete icon large"
+              />
+            ) : (
+              <i
+                onClick={() => moveTask(task, index, "right")}
+                className="angle right icon big"
+              />
+            )}
+          </div>
         </div>
       </div>
     );
