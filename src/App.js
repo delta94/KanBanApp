@@ -125,8 +125,6 @@ class App extends Component {
     }
 
     let buckets = this.state.buckets;
-    let bucketNames = this.state.bucketNames;
-
     let removalBucket = buckets[this.state.bucketNames[index]];
 
     removalBucket = removalBucket.filter(t => {
@@ -154,7 +152,6 @@ class App extends Component {
 
   render() {
     const {
-      buckets,
       bucketNames,
       showTaskForm,
       showBucketForm,
@@ -164,8 +161,8 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <h1 class="ui center aligned icon header">
-          <i class="sticky note outline icon" />
+        <h1 className="ui center aligned icon header">
+          <i className="sticky note outline icon" />
           Oren's Kanban App
         </h1>
         <div className="ui container">
@@ -195,7 +192,6 @@ class App extends Component {
                   <button
                     className="ui secondary button"
                     onClick={this.createNewBucket}
-                    className="ui secondary button"
                   >
                     New Bucket
                   </button>

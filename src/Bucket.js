@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Task from "./Task";
 
 export default class Bucket extends Component {
-  state = { tasks: [], showForm: false, newTask: "" };
+  state = { newTask: "" };
 
   handleChange = e => {
     this.setState({ newTask: e.target.value });
@@ -20,14 +20,14 @@ export default class Bucket extends Component {
       length
     } = this.props;
 
-    let { showForm, newTask } = this.state;
+    let { newTask } = this.state;
 
     return (
       <div className="ui card">
         <div className="ui content">
           <h3>{name}</h3>
           <div className="ui divider" />
-          <div class="ui list">
+          <div className="ui list">
             {tasks.map((task, i) => {
               return (
                 <Task
