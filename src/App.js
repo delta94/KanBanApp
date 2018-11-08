@@ -165,16 +165,11 @@ class App extends Component {
     const { draggedTask, buckets, draggedFromIndex, bucketNames } = this.state;
     let removalBucket = buckets[bucketNames[draggedFromIndex]];
 
-    console.log("removalBucket", removalBucket);
-
     removalBucket = removalBucket.filter(t => {
       return t !== draggedTask;
     });
 
-    console.log("removalBucket", removalBucket);
     let addBucket = [...buckets[bucketNames[index]], draggedTask];
-
-    console.log("addBucket", addBucket);
 
     let newBuckets = {
       ...buckets,
@@ -185,6 +180,23 @@ class App extends Component {
     this.setState({
       buckets: newBuckets,
       draggedTask: {}
+    });
+  };
+
+  deleteBucket = index => {
+    const buckets = { ...this.state.buckets };
+    const bucketNames = [...this.state.bucketNames];
+    let removalBucket = buckets[bucketNames[index]];
+    let newBucketNames = bucketNames.filter((name, i) => {
+      return i !== index;
+    });
+    let newBuckets = {
+      ...buckets
+    };
+    delete newBuckets[bucketNames[index]];
+    this.setState({
+      buckets: newBuckets,
+      bucketNames: newBucketNames
     });
   };
 
@@ -222,12 +234,13 @@ class App extends Component {
                     onDrag={this.onDrag}
                     onDrop={this.onDrop}
                     onDragOver={this.onDragOver}
+                    deleteBucket={this.deleteBucket}
                   />
                 </div>
               );
             })}
 
-            <div className="column">
+            <div className="ui column">
               {!showBucketForm ? (
                 <div className="ui card">
                   <button
@@ -238,8 +251,9 @@ class App extends Component {
                   </button>
                 </div>
               ) : null}
+
               {showBucketForm ? (
-                <form className="ui form" onSubmit={this.addNewBucket}>
+                <form className="ui  card" onSubmit={this.addNewBucket}>
                   <div className="ui input">
                     <input
                       value={newBucket}

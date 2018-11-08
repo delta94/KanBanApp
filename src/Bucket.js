@@ -15,6 +15,7 @@ export default class Bucket extends Component {
       addNewTask,
       createNewTask,
       showTaskForm,
+      deleteBucket,
       tasks,
       index,
       length,
@@ -54,7 +55,12 @@ export default class Bucket extends Component {
         onDragOver={event => onDragOver(event, index)}
       >
         <div className="ui content">
-          <h3>{name}</h3>
+          <h3 className="left floated">{name}</h3>
+          <i
+            className="trash icon right floated"
+            onClick={() => deleteBucket(index)}
+          />
+          <br />
           <div className="ui divider" />
           <div className="ui list">
             {tasks.map((task, i) => {
