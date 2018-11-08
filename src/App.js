@@ -23,7 +23,9 @@ class App extends Component {
     },
     showBucketForm: false,
     showTaskForm: false,
-    newBucket: ""
+    newBucket: "",
+    draggedTask: "",
+    draggedFromIndex: null
   };
 
   componentDidMount() {
@@ -118,29 +120,71 @@ class App extends Component {
         offset = 0;
     }
 
-    let buckets = this.state.buckets;
-    let removalBucket = buckets[this.state.bucketNames[index]];
+    const { buckets, bucketNames } = this.state;
+
+    let removalBucket = buckets[bucketNames[index]];
+
+    let newBuckets;
 
     removalBucket = removalBucket.filter(t => {
       return t !== task;
     });
-    let addBucket = [...buckets[this.state.bucketNames[index + offset]], task];
+    let addBucket = [...buckets[bucketNames[index + offset]], task];
 
     if (offset === 0) {
-      buckets = {
-        ...this.state.buckets,
-        [this.state.bucketNames[index]]: removalBucket
+      newBuckets = {
+        ...buckets,
+        [bucketNames[index]]: removalBucket
       };
     } else {
-      buckets = {
-        ...this.state.buckets,
-        [this.state.bucketNames[index]]: removalBucket,
-        [this.state.bucketNames[index + offset]]: addBucket
+      newBuckets = {
+        ...buckets,
+        [bucketNames[index]]: removalBucket,
+        [bucketNames[index + offset]]: addBucket
       };
     }
 
     this.setState({
-      buckets: buckets
+      buckets: newBuckets
+    });
+  };
+
+  onDrag = (event, task, draggedFromIndex) => {
+    event.preventDefault();
+    this.setState({
+      draggedTask: task,
+      draggedFromIndex
+    });
+  };
+
+  onDragOver = (event, index) => {
+    event.preventDefault();
+  };
+
+  onDrop = (event, index) => {
+    const { draggedTask, buckets, draggedFromIndex, bucketNames } = this.state;
+    let removalBucket = buckets[bucketNames[draggedFromIndex]];
+
+    console.log("removalBucket", removalBucket);
+
+    removalBucket = removalBucket.filter(t => {
+      return t !== draggedTask;
+    });
+
+    console.log("removalBucket", removalBucket);
+    let addBucket = [...buckets[bucketNames[index]], draggedTask];
+
+    console.log("addBucket", addBucket);
+
+    let newBuckets = {
+      ...buckets,
+      [bucketNames[draggedFromIndex]]: removalBucket,
+      [bucketNames[index]]: addBucket
+    };
+
+    this.setState({
+      buckets: newBuckets,
+      draggedTask: {}
     });
   };
 
@@ -175,6 +219,9 @@ class App extends Component {
                     createNewTask={this.createNewTask}
                     addNewTask={this.addNewTask}
                     showTaskForm={showTaskForm}
+                    onDrag={this.onDrag}
+                    onDrop={this.onDrop}
+                    onDragOver={this.onDragOver}
                   />
                 </div>
               );

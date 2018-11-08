@@ -17,13 +17,20 @@ export default class Bucket extends Component {
       showTaskForm,
       tasks,
       index,
-      length
+      length,
+      onDrag,
+      onDrop,
+      onDragOver
     } = this.props;
 
     let { newTask } = this.state;
 
     return (
-      <div className="ui card">
+      <div
+        className="ui card"
+        onDrop={event => onDrop(event, index)}
+        onDragOver={event => onDragOver(event, index)}
+      >
         <div className="ui content">
           <h3>{name}</h3>
           <div className="ui divider" />
@@ -36,6 +43,7 @@ export default class Bucket extends Component {
                   key={i}
                   index={index}
                   lastIndex={length - 1}
+                  onDrag={onDrag}
                 />
               );
             })}
