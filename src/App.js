@@ -6,10 +6,17 @@ class App extends Component {
   state = {
     bucketNames: ["Planning", "Design", "Development", "Deployment"],
     buckets: {
-      Planning: [],
+      Planning: ["Undo"],
       Design: [],
       Development: [],
-      Deployment: []
+      Deployment: [
+        "Delete Task (Undo)",
+        "Create Task",
+        "Move Task",
+        "Create Bucket",
+        "Persist Data",
+        "Make Responsive"
+      ]
     },
     showBucketForm: false,
     showTaskForm: false,
