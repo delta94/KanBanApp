@@ -25,7 +25,7 @@ export default class Bucket extends Component {
     return (
       <div className="ui card">
         <div className="ui content">
-          <h2>{name}</h2>
+          <h3>{name}</h3>
           <div className="ui divider" />
 
           <ul>

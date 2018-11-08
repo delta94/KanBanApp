@@ -15,7 +15,10 @@ class App extends Component {
         "Move Task",
         "Create Bucket",
         "Persist Data",
-        "Make Responsive"
+        "Make Responsive",
+        "Tasks",
+        "Buckets",
+        "App"
       ]
     },
     showBucketForm: false,
