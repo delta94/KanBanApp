@@ -16,40 +16,6 @@ class App extends Component {
     newBucket: ""
   };
 
-  moveTask = (task, index, direction) => {
-    let offset;
-    switch (direction) {
-      case "right":
-        offset = 1;
-        break;
-      case "left":
-        offset = -1;
-        break;
-      default:
-        offset = 0;
-    }
-
-    let buckets = this.state.buckets;
-    let bucketNames = this.state.bucketNames;
-
-    let removalBucket = buckets[this.state.bucketNames[index]];
-
-    removalBucket = removalBucket.filter(t => {
-      return t !== task;
-    });
-    let addBucket = [...buckets[this.state.bucketNames[index + offset]], task];
-
-    buckets = {
-      ...this.state.buckets,
-      [this.state.bucketNames[index]]: removalBucket,
-      [this.state.bucketNames[index + offset]]: addBucket
-    };
-
-    this.setState({
-      buckets: buckets
-    });
-  };
-
   componentDidMount() {
     this.hydrateStateWithLocalStorage();
     window.addEventListener(
@@ -131,6 +97,47 @@ class App extends Component {
     let buckets = { ...this.state.buckets };
     buckets[bucket].push(newTask);
     this.setState({ buckets: buckets, newTask: "", showTaskForm: false });
+  };
+
+  moveTask = (task, index, direction) => {
+    let offset;
+    switch (direction) {
+      case "right":
+        offset = 1;
+        break;
+      case "left":
+        offset = -1;
+        break;
+      default:
+        offset = 0;
+    }
+
+    let buckets = this.state.buckets;
+    let bucketNames = this.state.bucketNames;
+
+    let removalBucket = buckets[this.state.bucketNames[index]];
+
+    removalBucket = removalBucket.filter(t => {
+      return t !== task;
+    });
+    let addBucket = [...buckets[this.state.bucketNames[index + offset]], task];
+
+    if (offset === 0) {
+      buckets = {
+        ...this.state.buckets,
+        [this.state.bucketNames[index]]: removalBucket
+      };
+    } else {
+      buckets = {
+        ...this.state.buckets,
+        [this.state.bucketNames[index]]: removalBucket,
+        [this.state.bucketNames[index + offset]]: addBucket
+      };
+    }
+
+    this.setState({
+      buckets: buckets
+    });
   };
 
   render() {
