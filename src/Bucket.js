@@ -27,7 +27,7 @@ export default class Bucket extends Component {
 
     return (
       <div
-        className="ui card"
+        className="ui fluid card"
         onDrop={event => onDrop(event, index)}
         onDragOver={event => onDragOver(event, index)}
       >
