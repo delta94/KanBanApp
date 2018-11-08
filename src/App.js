@@ -30,13 +30,10 @@ class App extends Component {
     if (!localStorage.getItem("reset")) {
       this.hydrateStateWithLocalStorage();
     }
-    window.addEventListener(
-      "beforeunload",
-      this.saveStateToLocalStorage.bind(this)
-    );
+    window.addEventListener("beforeunload", this.saveStateToLocalStorage);
   }
 
-  hydrateStateWithLocalStorage() {
+  hydrateStateWithLocalStorage = () => {
     // for all items in state
     for (let key in this.state) {
       // if the key exists in localStorage
@@ -54,21 +51,18 @@ class App extends Component {
         }
       }
     }
-  }
+  };
 
-  saveStateToLocalStorage() {
+  saveStateToLocalStorage = () => {
     // for every item in React state
     for (let key in this.state) {
       // save to localStorage
       localStorage.setItem([key], JSON.stringify(this.state[key]));
     }
-  }
+  };
 
   componentWillUnmount() {
-    window.removeEventListener(
-      "beforeunload",
-      this.saveStateToLocalStorage.bind(this)
-    );
+    window.removeEventListener("beforeunload", this.saveStateToLocalStorage);
 
     // saves if component has a chance to unmount
     this.saveStateToLocalStorage();
