@@ -25,9 +25,31 @@ export default class Bucket extends Component {
 
     let { newTask } = this.state;
 
+    let color;
+    switch (index) {
+      case 0:
+        color = "teal";
+        break;
+      case 1:
+        color = "blue";
+        break;
+      case 2:
+        color = "violet";
+
+        break;
+
+      case 3:
+        color = "purple";
+        break;
+      default:
+        color = "pink";
+    }
+
+    let style = `ui ${color} fluid card`;
+
     return (
       <div
-        className="ui fluid card"
+        className={style}
         onDrop={event => onDrop(event, index)}
         onDragOver={event => onDragOver(event, index)}
       >

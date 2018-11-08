@@ -21,7 +21,7 @@ export default class Task extends Component {
         color = "purple";
         break;
       default:
-        color = "orange";
+        color = "pink";
     }
 
     let style = `ui ${color} segment`;
