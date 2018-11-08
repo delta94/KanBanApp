@@ -27,7 +27,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.hydrateStateWithLocalStorage();
+    if (!localStorage.getItem("reset")) {
+      this.hydrateStateWithLocalStorage();
+    }
     window.addEventListener(
       "beforeunload",
       this.saveStateToLocalStorage.bind(this)

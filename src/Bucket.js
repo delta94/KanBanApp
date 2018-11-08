@@ -27,8 +27,7 @@ export default class Bucket extends Component {
         <div className="ui content">
           <h3>{name}</h3>
           <div className="ui divider" />
-
-          <ul>
+          <div class="ui list">
             {tasks.map((task, i) => {
               return (
                 <Task
@@ -40,7 +39,7 @@ export default class Bucket extends Component {
                 />
               );
             })}
-          </ul>
+          </div>
           {showTaskForm !== name ? (
             <button
               onClick={() => createNewTask(name)}
