@@ -21,7 +21,8 @@ export default class Bucket extends Component {
       length,
       onDrag,
       onDrop,
-      onDragOver
+      onDragOver,
+      unfocus
     } = this.props;
 
     let { newTask } = this.state;

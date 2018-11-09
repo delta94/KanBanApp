@@ -37,7 +37,7 @@ export default class Task extends Component {
             {index === 0 ? (
               <i
                 onClick={() => moveTask(task, index, "delete")}
-                className="delete icon large"
+                className="trash icon"
               />
             ) : (
               <i
@@ -48,7 +48,7 @@ export default class Task extends Component {
             {index === lastIndex ? (
               <i
                 onClick={() => moveTask(task, index, "delete")}
-                className="delete icon large"
+                className="trash icon"
               />
             ) : (
               <i

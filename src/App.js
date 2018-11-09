@@ -25,7 +25,8 @@ class App extends Component {
     showTaskForm: false,
     newBucket: "",
     draggedTask: "",
-    draggedFromIndex: null
+    draggedFromIndex: null,
+    unfocusCounter: 0
   };
 
   componentDidMount() {
@@ -200,6 +201,14 @@ class App extends Component {
     });
   };
 
+  unfocus = e => {
+    this.setState({
+      showBucketForm: false,
+      showTaskForm: false,
+      unfocusCounter: 0
+    });
+  };
+
   render() {
     const {
       bucketNames,
@@ -210,7 +219,7 @@ class App extends Component {
     } = this.state;
 
     return (
-      <React.Fragment>
+      <div onDoubleClick={this.unfocus}>
         <h1 className="ui center aligned icon header">
           <i className="sticky note outline icon" />
           Oren's Kanban App
@@ -235,6 +244,7 @@ class App extends Component {
                     onDrop={this.onDrop}
                     onDragOver={this.onDragOver}
                     deleteBucket={this.deleteBucket}
+                    unfocus={this.unfocus}
                   />
                 </div>
               );
@@ -267,7 +277,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
